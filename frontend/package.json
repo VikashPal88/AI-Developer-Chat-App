@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "axios": "^1.9.0",
+    "highlight": "^0.2.4",
+    "highlight.js": "^11.11.1",
+    "markdown-to-jsx": "^7.7.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.3",

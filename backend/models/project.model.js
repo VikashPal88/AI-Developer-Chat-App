@@ -9,7 +9,7 @@ const projectSchema = new mongoose.Schema({
     unique: true,
   },
 
-  Users: [
+  users: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
