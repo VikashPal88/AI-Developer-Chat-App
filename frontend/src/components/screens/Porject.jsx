@@ -166,6 +166,18 @@ const Project = () => {
 
     // }, [])
 
+    useEffect(() => {
+        axios.get('/users/all').then(res => {
+
+            setUsers(res.data.users)
+
+        }).catch(err => {
+
+            console.log(err)
+
+        })
+    }, [])
+
     function saveFileTree(ft) {
         axios.put('/projects/update-file-tree', {
             projectId: project._id,
