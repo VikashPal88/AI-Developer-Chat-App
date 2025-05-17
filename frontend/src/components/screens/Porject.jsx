@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react'
 import { UserContext } from '../../context/user.context'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from '../../config/axios'
-// import { initializeSocket, receiveMessage, sendMessage } from '../config/socket'
+import { initializeSocket, sendMessage, receiveMessage } from '../../config/socket'
 import Markdown from 'markdown-to-jsx'
 import hljs from 'highlight.js';
 // import { getWebContainer } from '../config/webcontainer'
@@ -109,62 +109,62 @@ const Project = () => {
             </div>)
     }
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     initializeSocket(project._id)
+        initializeSocket(project._id)
 
-    //     if (!webContainer) {
-    //         getWebContainer().then(container => {
-    //             setWebContainer(container)
-    //             console.log("container started")
-    //         })
-    //     }
-
-
-    //     receiveMessage('project-message', data => {
-
-    //         console.log(data)
-
-    //         if (data.sender._id == 'ai') {
+        // if (!webContainer) {
+        //     getWebContainer().then(container => {
+        //         setWebContainer(container)
+        //         console.log("container started")
+        //     })
+        // }
 
 
-    //             const message = JSON.parse(data.message)
+        // receiveMessage('project-message', data => {
 
-    //             console.log(message)
+        //     console.log(data)
 
-    //             webContainer?.mount(message.fileTree)
-
-    //             if (message.fileTree) {
-    //                 setFileTree(message.fileTree || {})
-    //             }
-    //             setMessages(prevMessages => [...prevMessages, data]) // Update messages state
-    //         } else {
+        //     if (data.sender._id == 'ai') {
 
 
-    //             setMessages(prevMessages => [...prevMessages, data]) // Update messages state
-    //         }
-    //     })
+        //         const message = JSON.parse(data.message)
+
+        //         console.log(message)
+
+        //         webContainer?.mount(message.fileTree)
+
+        //         if (message.fileTree) {
+        //             setFileTree(message.fileTree || {})
+        //         }
+        //         setMessages(prevMessages => [...prevMessages, data]) // Update messages state
+        //     } else {
 
 
-    //     axios.get(`/projects/get-project/${location.state.project._id}`).then(res => {
+        //         setMessages(prevMessages => [...prevMessages, data]) // Update messages state
+        //     }
+        // })
 
-    //         console.log(res.data.project)
 
-    //         setProject(res.data.project)
-    //         setFileTree(res.data.project.fileTree || {})
-    //     })
+        axios.get(`/projects/get-project/${location.state.project._id}`).then(res => {
 
-    //     axios.get('/users/all').then(res => {
+            console.log(res.data.project)
 
-    //         setUsers(res.data.users)
+            setProject(res.data.project)
+            setFileTree(res.data.project.fileTree || {})
+        })
 
-    //     }).catch(err => {
+        axios.get('/users/all').then(res => {
 
-    //         console.log(err)
+            setUsers(res.data.users)
 
-    //     })
+        }).catch(err => {
 
-    // }, [])
+            console.log(err)
+
+        })
+
+    }, [])
 
     useEffect(() => {
         axios.get('/users/all').then(res => {
